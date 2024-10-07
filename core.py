@@ -45,7 +45,7 @@ index.add(embeddings_array)
 # Set up the Hugging Face model for question answering using HuggingFaceHub
 qa_model = HuggingFaceHub(
     repo_id="google/flan-t5-large",  # A model suitable for text2text-generation
-    huggingfacehub_api_token="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"
+    huggingfacehub_api_token="**********"
 )
 # Create Hugging Face embeddings
 huggingface_embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
