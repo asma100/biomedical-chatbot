@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/landingpage.css"> 
+    <title>{{ title }}</title>
+    <!-- Add your CSS files here -->
+</head>
+<body>
+    <header class="site-header">
+        <div class="navbar-nav mr-auto">
+            <a class="nav-item " href="{{ url_for('home') }}">Home</a>
+            <a class="nav-item" href="{{ url_for('about') }}">About</a>
+          </div>
+          <!-- Navbar Right Side -->
+          <div class="navbar-nav">
+            {% if current_user.is_authenticated %}
+              <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+              <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+              <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+          </div>
+        </nav>
+      </header>
+
+      <div class="background-image-container">
+        <img src="/static/abcd.png" alt="Background Image" class="background-image">
+    </div>
+      <main role="main" class="container">
+        <div class="row justify-content-center"> <!-- Add this to center horizontally -->
+          <div class="col-md-8 text-center"> <!-- Add text-center to center text -->
+            <!-- Flash Messages Here -->
+            <h1 class="mainheader"></h1>
+            <form method="POST" action="{{ url_for('home') }}">
+              <button type="submit" class="button2">BME Chatbot<br>Start Chatting?</button>
+            </form>
+          </div>
+        </div>
+      </main>
+      
+</body>
+</html>

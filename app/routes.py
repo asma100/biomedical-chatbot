@@ -3,15 +3,17 @@ from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm
 from app.models import User
 from flask_login import login_user, current_user, logout_user, login_required
-from app.ollama import ask_question
+from app.huggingface import ask_question
 from flask import Flask
 
 
 
 
 @app.route("/", methods=['GET', 'POST'])
-def index():
-    return redirect(url_for('home'))
+def landingpage():
+    if request.method == 'POST':
+        return redirect(url_for('home'))
+    return render_template('landingpage.html')
 
 
 @app.route("/home", methods=['GET', 'POST'])
@@ -26,6 +28,10 @@ def home():
 
     return render_template('index.html', query=query, answer=answer)
 
+@app.route("/about", methods=['GET', 'POST'])
+def about():
+    return render_template('about.html', title='About')
+
 @app.route('/get_response', methods=['POST'])
 def get_response():
     data = request.get_json()
@@ -34,6 +40,7 @@ def get_response():
         answer = ask_question(query)
         return jsonify({'response': answer})
     return jsonify({'response': 'No query provided.'})
+
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/register", methods=['GET', 'POST'])
