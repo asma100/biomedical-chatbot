@@ -1,0 +1,321 @@
+- |- Device/
+       |- app/
+              |- pdf/
+              |- static/
+                     |- style.css
+              |- templates/
+                     |- index.html
+              |- __init__.py
+              |- forms.py
+              |- models
+              |- ollama.py
+              |- routes.py
+       |-run.py
+
+
+
+run.py:
+from app.routes import app
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+app/routes.py:
+from flask import render_template, url_for, flash, redirect, request,send_file
+#from app.routes import app, db, bcrypt
+#from forms import RegistrationForm, LoginForm
+#from models import User
+#from flask_login import login_user, current_user, logout_user, login_required
+from app.ollama import ask_question
+#from app import app
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/home", methods=['GET', 'POST'])
+def home():
+    query = None
+    answer = None
+
+    if request.method == 'POST':
+        query = request.form.get('query')
+        if query:
+            answer = ask_question(query)
+    
+    return render_template('index.html', query=query, answer=answer)
+app/ollama:
+import os
+import PyPDF2
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+import faiss
+from sentence_transformers import SentenceTransformer
+import numpy as np
+from langchain.chains import RetrievalQA
+from langchain_community.vectorstores import FAISS
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.llms import Ollama
+
+# Set up PDF processing and FAISS (unchanged from your original setup)
+pdf_path = r"D:\vs\device-DR-chatbot\app\pdfs\Maintenance Manual for Laboratory Equipment - WHO.pdf"
+
+def extract_text_from_pdf(pdf_path):
+    with open(pdf_path, 'rb') as f:
+        reader = PyPDF2.PdfReader(f)
+        text = "".join([page.extract_text() for page in reader.pages])
+    return text
+
+def split_text(text, chunk_size=500, chunk_overlap=50):
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
+    return text_splitter.split_text(text)
+
+
+
+manual_text = extract_text_from_pdf(pdf_path)
+chunks = split_text(manual_text)
+
+# Local embeddings model setup
+model = SentenceTransformer('all-mpnet-base-v2')
+embeddings = [model.encode(chunk) for chunk in chunks]
+embeddings_array = np.vstack(embeddings)
+
+dimension = embeddings_array.shape[1]
+index = faiss.IndexFlatL2(dimension)
+index.add(embeddings_array)
+faiss.write_index(index, "faiss_index/index.faiss")
+
+# Set up Ollama model for QA
+qa_model = Ollama(model="llama2:7b-chat")  # Specify the Ollama model here
+
+# Create Hugging Face embeddings (for retrieval)
+huggingface_embeddings = HuggingFaceEmbeddings(model_name="all-mpnet-base-v2")
+text_embeddings = [(text, emb.tolist()) for text, emb in zip(chunks, embeddings_array)]
+faiss_store = FAISS.from_embeddings(text_embeddings=text_embeddings, embedding=huggingface_embeddings)
+
+retriever = faiss_store.as_retriever()
+
+# Set up the RetrievalQA chain
+qa_chain = RetrievalQA.from_chain_type(
+    llm=qa_model,
+    retriever=retriever,
+    chain_type="map_reduce"
+)
+
+# Define a function to ask questions
+def ask_question(query):
+    response = qa_chain.invoke({"query": query})
+    return response["result"]
+
+
+app/templates/index.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Chatbot - Brave Coder</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title">Device-DR Chatbot</div>
+        <div class="box">
+            <div class="item">
+                <div class="icon">
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="msg">
+                    <p>Hello everyone, How are you?</p>
+                </div>
+            </div>
+            <br clear="both">
+            <div class="item right">
+                <div class="msg">
+                    <p>Nice</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Typing area with form -->
+        <div class="typing-area">
+            <form action="{{ url_for('home') }}" method="POST" class="input-field">
+                <input type="text" name="query" placeholder="Type your message" required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+app/static/style.css:
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 370px;
+}
+
+.wrapper .title {
+    background: #007bff;
+    color: white;
+    line-height: 2.5;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+    font-size: 20px;
+}
+
+.wrapper .box {
+    border: 1px solid #efefef;
+    padding: 10px 15px;
+    min-height: 400px;
+    max-height: 400px;
+}
+
+.wrapper .box .item {
+    display: flex;
+    float: left;
+    margin: 10px 0;
+}
+
+.wrapper .box .item .icon {
+    background: #007bff;
+    color: white;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+}
+
+.wrapper .box .item .msg {
+    background: #007bff;
+    color: white;
+    border-radius: 10px;
+    width: 150px;
+    margin-left: 10px;
+}
+
+.wrapper .box .item .msg p {
+    padding: 10px;
+}
+
+.wrapper .box .item.right {
+    float: right;
+}
+
+.wrapper .box .item.right .msg {
+    background: #efefef;
+    color: #333;
+}
+
+.wrapper .typing-area {
+    width: 100%;
+    background: #efefef;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.wrapper .typing-area .input-field {
+    width: 100%;
+    position: relative;
+}
+
+.wrapper .typing-area .input-field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    outline: none;
+    padding-right: 70px;
+    font-family: 'Poppins', sans-serif;
+    transition: 0.3s all ease;
+}
+
+.wrapper .typing-area .input-field input:focus {
+    border-color: #007bff;
+}
+
+.wrapper .typing-area .input-field button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 1px solid #007bff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: #007bff;
+    outline: none;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s all ease;
+}
+
+.wrapper .typing-area .input-field button:hover {
+    background: #007bff;
+    color: white;
+}
+
+.wrapper .typing-area .input-field input:valid ~ button {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+
+(chatbot11-env) PS D:\vs\device-DR-chatbot> & C:/Users/acer/miniconda3/envs/chatbot11-env/python.exe d:/vs/device-DR-chatbot/run.py
+C:\Users\acer\miniconda3\envs\chatbot11-env\Lib\site-packages\transformers\tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+d:\vs\device-DR-chatbot\app\ollama.py:44: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-huggingface package and should be used instead. To use it run `pip install -U :class:`~langchain-huggingface` and import as `from :class:`~langchain_huggingface import HuggingFaceEmbeddings``.
+  huggingface_embeddings = HuggingFaceEmbeddings(model_name="all-mpnet-base-v2")
+C:\Users\acer\miniconda3\envs\chatbot11-env\Lib\site-packages\transformers\tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+ * Serving Flask app 'app.routes'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+C:\Users\acer\miniconda3\envs\chatbot11-env\Lib\site-packages\transformers\tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+d:\vs\device-DR-chatbot\app\ollama.py:44: LangChainDeprecationWarning: The class `HuggingFaceEmbeddings` was deprecated in LangChain 0.2.2 and will be removed in 1.0. An updated version of the class exists in the :class:`~langchain-huggingface package and should be used instead. To use it run `pip install -U :class:`~langchain-huggingface` and import as `from :class:`~langchain_huggingface import HuggingFaceEmbeddings``.
+  huggingface_embeddings = HuggingFaceEmbeddings(model_name="all-mpnet-base-v2")
+C:\Users\acer\miniconda3\envs\chatbot11-env\Lib\site-packages\transformers\tokenization_utils_base.py:1617: FutureWarning: `clean_up_tokenization_spaces` was not set. It will be set to `True` by default. This behavior will be deprecated in transformers v4.45, and will be then set to `False` by default. For more details check this issue: https://github.com/huggingface/transformers/issues/31884
+  warnings.warn(
+ * Debugger is active!
+ * Debugger PIN: 103-068-783
+127.0.0.1 - - [11/Oct/2024 20:41:19] "GET / HTTP/1.1" 404 -
+127.0.0.1 - - [11/Oct/2024 20:41:19] "GET /favicon.ico HTTP/1.1" 404 -
+(chatbot11-env) PS D:\vs\device-DR-chatbot> ^C
+(chatbot11-env) PS D:\vs\device-DR-chatbot> 
+
+
+
+
+
+the code is so slow and it is not working it says :
+Not Found
+The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+
+how to improve this code 
+
+            
