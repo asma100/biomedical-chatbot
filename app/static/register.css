@@ -1,170 +1,146 @@
-body{
-    position: relative;
-    background-image:url(settings.jpg);
-    
-
-    margin: 0; /* Remove default body margin */
-  }
-  
- 
-  
-  
-  .site-header .navbar-nav .nav-link.active {
-      font-weight: 500;
-      font-family: monospace;
-  
-    }
-  
-    .site-header{
-      display: flex;
-      justify-content: center;
-      background-color: rgb(0, 0, 0);
-      width: 100%;
-  
-    }
-  
-    .nav-item{
-      margin-left: 50px;
-      text-decoration:none ;
-      color: rgb(253, 249, 249);
-      font-weight: 900;
-      font-size: 1.5em;
-      font-family: monospace;
-  
-    }
-    .nav-item:hover{
-      color: rgb(248, 222, 222);
-      cursor: pointer;
-    }
-  
-  
-    .foot{
-      margin-left: 30px;
-      text-decoration:none ;
-      color: rgb(255, 255, 255);
-      font-weight: 900;
-      font-size: 0.9em;
-      font-family: monospace;
-  
-    }
-  .container2{
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    bottom:0px;
-    width: 143;
-  }
-  
-    .footer:hover{
-      color: rgb(248, 222, 222);
-      cursor: pointer;
-    }
-
-.register-wbox{
-    display: flex;
-    font-size: larger;
-    background-color: rgb(255, 255, 255);
-    width: 50vw;
-    height: 43vw;
-    flex-direction: column;
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-.container{
-    display: flex;
-    justify-content: center;   
-}
-.form-group{
-  background-color: #ffffff;
-
+/* Full height and width for body and HTML */
+html, body {
+  height: 100%;
+  font-family: 'Arial', sans-serif;
 }
 
-.form-group  fieldset {
-    position: absolute;
-  height: 550px;
-
+/* Navigation bar styling */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
 }
 
-.form-group div{
-    margin-top: 50px;
-    margin-bottom: 10px;
+.nav-item {
+  margin-left: 20px;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
 }
 
-.btn{
-    border: #ffffff;
-    background-color: #000000;
-    color: #ffffff;
-    width: 100px;
-    height: 50px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+.nav-item:hover {
+  color: #007bff;
 }
 
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
 
-.button2 {
-    display: inline-block;
-    transition: all 0.2s ease-in;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    color: #090909;
-    padding: 0.7em 1.7em;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 0.5em;
-    background: #fffefe;
-    border: 1px solid #e8e8e8;
-    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+/* Background image */
+.background-image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Puts the image behind the content */
+  overflow: hidden;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Container for the registration form */
+.content1 {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* Ensure it's on top of the background */
+  text-align: center;
+}
+
+.content1 h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Form inputs */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Form label styling */
+.form-control-label {
+  margin-bottom: 5px;
+  text-align: left;
+  display: block;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Submit button */
+button[type="submit"] {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Login link styling */
+.content1 p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.content1 p a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.content1 p a:hover {
+  color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content1 {
+      width: 90%;
+      margin: 50px auto;
   }
-  
-  .button2:active {
-    color: #666;
-    box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+
+  .site-header {
+      padding: 10px 20px;
   }
-  
-  .button2:before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%) scaleY(1) scaleX(1.25);
-    top: 100%;
-    width: 140%;
-    height: 180%;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 50%;
-    display: block;
-    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-    z-index: -1;
-  }
-  
-  .button2:after {
-    content: "";
-    position: absolute;
-    left: 55%;
-    transform: translateX(-50%) scaleY(1) scaleX(1.45);
-    top: 180%;
-    width: 160%;
-    height: 190%;
-    background-color: #000000;
-    border-radius: 50%;
-    display: block;
-    transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
-    z-index: -1;
-  }
-  
-  .button2:hover {
-    color: #ffffff;
-    border: 1px solid #000000;
-  }
-  
-  .button2:hover:before {
-    top: -35%;
-    background-color: #000000;
-    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-  }
-  
-  .button2:hover:after {
-    top: -45%;
-    background-color: #000000;
-    transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
-  }
+}

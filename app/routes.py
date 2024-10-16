@@ -9,15 +9,15 @@ from flask import Flask
 
 
 
-@app.route("/", methods=['GET', 'POST'])
-def landingpage():
+@app.route("/home", methods=['GET', 'POST'])
+def home():
     if request.method == 'POST':
-        return redirect(url_for('home'))
+        return redirect(url_for('chat'))
     return render_template('landingpage.html')
 
 
-@app.route("/home", methods=['GET', 'POST'])
-def home():
+@app.route("/chat", methods=['GET', 'POST'])
+def chat():
     query = None
     answer = None
 
@@ -76,4 +76,3 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
-
