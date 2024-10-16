@@ -3,7 +3,7 @@ from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm
 from app.models import User
 from flask_login import login_user, current_user, logout_user, login_required
-from app.huggingface import ask_question
+from app.ollama import ask_question
 from flask import Flask
 
 

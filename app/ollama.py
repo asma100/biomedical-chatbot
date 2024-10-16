@@ -59,7 +59,7 @@ text_embeddings = [(text, emb.tolist()) for text, emb in zip(chunks, embeddings_
 
 # Set up Ollama model for QA
 
-qa_model = Ollama(model="llama3.2") # Specify the Ollama model here
+qa_model = Ollama(model="mistral:7b") # Specify the Ollama model here
 # Create Hugging Face embeddings (for retrieval)
 huggingface_embeddings = HuggingFaceEmbeddings(model_name="all-mpnet-base-v2")
 faiss_store = FAISS.from_embeddings(text_embeddings=text_embeddings, embedding=huggingface_embeddings)
