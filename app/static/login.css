@@ -112,7 +112,7 @@ html, body {
 /* Submit button */
 button[type="submit"] {
     width: 100%;
-    background-color: #007bff;
+    background-color: #000000;
     color: white;
     padding: 10px;
     border: none;

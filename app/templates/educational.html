@@ -3,27 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/landingpage.css"> 
-    <title>{{ title }}</title>
+    <title>About | Biomedical Engineer's Assistant</title>
+    <link rel="stylesheet" href="static/about.css">
 </head>
 <body>
 
-    <h1 class="mainheader">Biomedical<br>Engineers<br>assistant..</bar></h1>
-    <p class="main_pa">"     Welcome to the Biomedical Engineer's Assistant — a dedicated platform offering an AI-powered chatbot and a wealth of educational resources designed to support and empower biomedical engineers in their work and studies."</p>
-    <div class="background-image-container">
-        <img src="/static/abcd.png" alt="Background Image" class="background-image">
-    </div>
-
-    <main role="main" class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                
-                <form method="POST" action="{{ url_for('home') }}">
-                    <button type="submit" class="button-85">AI chatbot<br>Start?</button>
-                </form>
-            </div>
-        </div>
-    </main>
     <header class="site-header">
         <nav>
             <div class="navbar-nav">
@@ -35,7 +19,7 @@
                 {% if current_user.is_authenticated %}
                 <a class="nav-item" href="{{ url_for('chat') }}">AI chatbot</a>
                     <a class="nav-item" href="{{ url_for('logout') }}">Logout</a>
-
+                    
                 {% else %}
                     <a class="nav-item" href="{{ url_for('login') }}">Login</a>
                     <a class="nav-item" href="{{ url_for('register') }}">Register</a>
@@ -44,4 +28,5 @@
         </nav>
     </header>
 </body>
+
 </html>

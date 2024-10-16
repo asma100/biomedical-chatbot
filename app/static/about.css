@@ -1,0 +1,91 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+    margin: 0;
+    padding: 0;
+    
+}
+
+/* Header Styles */
+.theheader {
+    position: absolute;
+    left:60vh;
+    top:7vh;
+    z-index: 3;
+    font-size: 7vh;
+    font-weight:700;
+    
+}
+
+/* Main Content Styles */
+.p{
+    position: absolute;
+    left: 60vh;
+    top: 30vh;
+    z-index: 3;
+    font-size: 2vh;
+    font-weight: bold;
+    width: 65vw;
+    text-align: justify;
+}
+
+
+
+/* Footer Styles */
+footer {
+    color: rgb(1, 1, 1);
+    text-align: center;
+    padding: 1px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+}
+
+
+/* Navbar styling */
+.site-header {
+    position: relative;
+    z-index: 2; /* Ensure navbar is above the background */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px 50px;
+    width: 25%;
+}
+
+
+
+.navbar-nav{
+    display: flex;
+    flex-direction:column ;
+    
+}
+
+.nav-item{
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    margin-bottom: 0vh;
+    margin-top:5vh ;
+    color: #ffffff;
+    background-color:rgb(0, 0, 0);
+    font-size: 3vh;
+    font-weight: bold;
+    text-decoration:none ;
+    text-align: center;
+    width: 150%;
+    margin-left: 5vh;
+    box-shadow: 20px 20px 10px rgba(56, 165, 212, 0.4);
+    transition: background-color 0.3s;
+}
+
+
+
+.nav-item:hover {
+    background-color:white ;
+    color: rgb(3, 3, 3); /* Change hover color */
+    cursor: pointer;
+}

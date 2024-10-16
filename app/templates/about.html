@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Biomedical Engineer's Assistant</title>
+    <link rel="stylesheet" href="static/about.css">
+</head>
+<body>
+        <h1 class="theheader">About Biomedical Engineer's Assistant</h1>
+    
+        <section class="p">
+            <p>
+                At Biomedical Engineer's Assistant, we are committed to providing biomedical engineers with a powerful resource to enhance their learning and professional development. Our platform combines an intelligent AI-powered chatbot with a rich library of educational materials tailored specifically for the field of biomedical engineering.
+            </p>
+            <p>
+                Whether you're a student, researcher, or professional, the Biomedical Engineer's Assistant is here to support you every step of the way. Our chatbot is designed to answer questions, assist with complex topics, and offer insights to help you tackle your projects with confidence. Additionally, our curated educational content covers a wide range of subjects, from medical devices and biotechnologies to bioinformatics and clinical engineering.
+            </p>
+            <p>
+                Our mission is to make advanced knowledge and tools accessible to all biomedical engineers, helping them stay at the forefront of innovation and technology. Join us on this journey and take your expertise to the next level with the Biomedical Engineer's Assistant!
+            </p>
+        </section>
+    
+    <footer>
+        <p>&copy; 2024 Biomedical Engineer's Assistant</p>
+    </footer>
+</body>
+<header class="site-header">
+    <nav>
+        <div class="navbar-nav">
+            <a class="nav-item" href="{{ url_for('home') }}">Home</a>
+            <a class="nav-item" href="{{ url_for('about') }}">About</a>
+            <a class="nav-item" href="{{ url_for('educational') }}">educational </a>
+        </div>
+        <div class="navbar-nav">
+            {% if current_user.is_authenticated %}
+            <a class="nav-item" href="{{ url_for('chat') }}">AI chatbot</a>
+                <a class="nav-item" href="{{ url_for('logout') }}">Logout</a>
+                
+            {% else %}
+                <a class="nav-item" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-item" href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+</html>

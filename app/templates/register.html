@@ -11,6 +11,7 @@
         <div class="navbar-nav">
             <a class="nav-item " href="{{ url_for('home') }}">Home</a>
             <a class="nav-item" href="{{ url_for('about') }}">About</a>
+            <a class="nav-item" href="{{ url_for('educational') }}">educational </a>
           </div>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">
@@ -23,11 +24,12 @@
           </div>
         </nav>
       </header>
-
+      
     <div class="background-image-container">
         <img src="/static/signin.png" alt="Background Image" class="background-image">
-    
-    <div class="content1">
+    </div>
+        
+    <div class="container1">
     <h1>Register</h1>
     <form method="POST">
         {{ form.hidden_tag() }}

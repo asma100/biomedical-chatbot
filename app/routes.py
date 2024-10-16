@@ -31,6 +31,9 @@ def chat():
 @app.route("/about", methods=['GET', 'POST'])
 def about():
     return render_template('about.html', title='About')
+@app.route("/educational", methods=['GET', 'POST'])
+def educational():
+    return render_template('educational.html', title='educational')
 
 @app.route('/get_response', methods=['POST'])
 def get_response():

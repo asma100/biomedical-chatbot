@@ -1,146 +1,155 @@
 /* General reset */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* Full height and width for body and HTML */
 html, body {
-  height: 100%;
-  font-family: 'Arial', sans-serif;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
 }
 
-/* Navigation bar styling */
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  padding: 10px 50px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 10;
-}
 
-.nav-item {
-  margin-left: 20px;
-  color: #333;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 16px;
-}
+.site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+    font-family: monospace;
 
-.nav-item:hover {
-  color: #007bff;
-}
+  }
 
-.navbar-nav {
-  display: flex;
-  align-items: center;
-}
+  .site-header{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+
+  }
+
+  .nav-item{
+    margin-left: 50px;
+    text-decoration:none ;
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+    font-size: 1.5em;
+    font-family: monospace;
+
+  }
+  .nav-item:hover{
+    color: rgb(248, 222, 222);
+    cursor: pointer;
+  }
+
+
+
 
 /* Background image */
 .background-image-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* Puts the image behind the content */
-  overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Puts the image behind the content */
+    overflow: hidden;
 }
 
 .background-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Container for the registration form */
-.content1 {
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 30px;
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1; /* Ensure it's on top of the background */
-  text-align: center;
+/* Container for the login form */
+.container1 {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1; /* Ensure it's on top of the background */
+    text-align: center;
 }
 
-.content1 h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
+.container1 h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
 }
 
 /* Form inputs */
 .form-control {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 .form-control:focus {
-  border-color: #007bff;
-  outline: none;
+    border-color: #007bff;
+    outline: none;
 }
 
 /* Form label styling */
 .form-control-label {
-  margin-bottom: 5px;
-  text-align: left;
-  display: block;
-  font-size: 14px;
-  color: #333;
+    margin-bottom: 5px;
+    text-align: left;
+    display: block;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Remember checkbox */
+.form-check-label {
+    font-size: 14px;
+    color: #333;
 }
 
 /* Submit button */
 button[type="submit"] {
-  width: 100%;
-  background-color: #007bff;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+    width: 100%;
+    background-color: #000000;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 button[type="submit"]:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 /* Login link styling */
-.content1 p {
-  margin-top: 15px;
-  font-size: 14px;
+.container1 p {
+    margin-top: 15px;
+    font-size: 14px;
 }
 
-.content1 p a {
-  color: #007bff;
-  text-decoration: none;
-  transition: color 0.3s;
+.container1 p a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
 }
 
-.content1 p a:hover {
-  color: #0056b3;
+.container1 p a:hover {
+    color: #0056b3;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .content1 {
-      width: 90%;
-      margin: 50px auto;
-  }
+    .container1 {
+        width: 90%;
+        margin: 50px auto;
+    }
 
-  .site-header {
-      padding: 10px 20px;
-  }
+    .site-header {
+        padding: 10px 20px;
+    }
 }

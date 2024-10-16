@@ -28,11 +28,12 @@ body {
 
 .wrapper .title {
     background: #ffffff;
-    color: #307c9f;
+    color: #000000;
     padding: 15px;
     text-align: left;
     font-size: 60px;
     font-weight: bolder;
+    margin-left: 20vh;
 }
 
 .wrapper .box {
@@ -54,7 +55,7 @@ body {
 }
 
 .wrapper .box .item .icon {
-    background: #307c9f;
+    background: #000000;
     color: white;
     width: 40px;
     height: 40px;
@@ -73,7 +74,7 @@ body {
 }
 
 .wrapper .box .item .msg {
-    background: #307c9f;
+    background: #000000;
     color: white;
     border-radius: 10px;
     padding: 10px;
@@ -103,7 +104,7 @@ body {
 }
 
 .wrapper .typing-area button {
-    background: #307c9f;
+    background: #000000;
     border: none;
     color: white;
     padding: 10px 15px;
@@ -126,23 +127,25 @@ body {
 .nav-item{
     padding-top: 3vh;
     padding-bottom: 3vh;
-    margin-bottom: 5vh;
+    margin-bottom: 0vh;
     margin-top:5vh ;
-    color: #042a3c;
-    background-color:#e5f4fb;
+    color: #ffffff;
+    background-color:rgb(0, 0, 0);
     font-size: 3vh;
     font-weight: bold;
     text-decoration:none ;
     text-align: center;
-    width: 80%;
-    margin-left: 5vh;
-    box-shadow: rgba(56, 90, 117, 0.25) 0px 50px 100px -20px, rgba(43, 97, 81, 0.3) 0px 30px 60px -30px, rgba(85, 142, 200, 0.35) 0px -2px 6px 0px inset;
+    width: 70%;
+    margin-left: 10vh;
+    box-shadow: 20px 20px 10px rgba(56, 165, 212, 0.4);
+    transition: background-color 0.3s;
 }
 
 .nav-item:hover{
-    color: rgb(185, 191, 197);
+    color: rgb(0, 0, 0);
+    
     cursor: pointer;
-    background-color: #6da5c0;
+    background-color: #ffffff;
   }
   
 
