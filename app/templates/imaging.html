@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imaging Devices</title>
+    <link rel="stylesheet" href="static/imaging.css">
+</head>
+<body>
+    <div class=" main_section">
+    <section id="mri">
+        <h2>MRI</h2>
+        <img src="static/imags/mri.jpg" alt="MRI Machine">
+        <p>MRI (Magnetic Resonance Imaging) uses powerful magnets and radio waves to create detailed images of organs and tissues. Key components include the magnet, gradient coils, and RF transmitter.</p>
+        <a href="https://www.youtube.com/watch?v=example">Watch a video about MRI</a>
+    </section>
+
+    <section id="ct">
+        <h2>CT Scanner</h2>
+        <img src="static/imags/ct.jpg" alt="CT Scanner">
+        <p>CT scanners use X-rays to create cross-sectional images of the body. Important parts include the X-ray tube, detectors, and gantry.</p>
+        <a href="https://www.youtube.com/watch?v=example">Watch a video about CT Scanners</a>
+    </section>
+
+    <section id="static/imags/xray">
+        <h2>X-ray Machine</h2>
+        <img src="static/imags/xray.jpg" alt="X-ray Machine">
+        <p>X-ray machines capture images of the body's internal structure using X-rays. The main components are the X-ray tube, image detector, and control console.</p>
+        <a href="https://www.youtube.com/watch?v=example">Watch a video about X-ray Machines</a>
+    </section>
+</div>
+    <footer>
+        <p>&copy; 2024 Biomedical Engineering Educational Resources</p>
+    </footer>
+</body>
+<header class="site-header">
+    <nav>
+        <div class="navbar-nav">
+            <a class="nav-item" href="{{ url_for('home') }}">Home</a>
+            <a class="nav-item" href="{{ url_for('imaging') }}">imaging</a>
+            <a class="nav-item" href="{{ url_for('ICU') }}">ICU </a>
+            <a class="nav-item" href="{{ url_for('laboratory') }}">laboratory </a>
+            <a class="nav-item" href="{{ url_for('surgical') }}">surgical </a>
+        </div>
+        <div class="navbar-nav">
+            {% if current_user.is_authenticated %}
+            <a class="nav-item" href="{{ url_for('chat') }}">AI chatbot</a>
+                <a class="nav-item" href="{{ url_for('logout') }}">Logout</a>
+                
+            {% else %}
+                <a class="nav-item" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-item" href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+</html>

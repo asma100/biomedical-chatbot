@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICU Devices</title>
+    <link rel="stylesheet" href="static/ICU.css">
+</head>
+<body>
+    <div class=" main_section">
+    <section id="ventilator">
+        <h2>Ventilator</h2>
+        <img src="static/imags/ventilator.jpg" alt="Ventilator">
+        <p>Ventilators help patients breathe by providing mechanical ventilation. Main components include the control system, oxygen supply, and humidifier.</p>
+        <a href="https://www.youtube.com/watch?v=example">Watch a video about Ventilators</a>
+    </section>
+
+    <section id="monitor">
+        <h2>Patient Monitor</h2>
+        <img src="static/imags/monitor.jpg" alt="Patient Monitor">
+        <p>Patient monitors track vital signs such as heart rate, oxygen saturation, and blood pressure. Key components include sensors, display screen, and alarms.</p>
+        <a href="https://www.youtube.com/watch?v=example">Watch a video about Patient Monitors</a>
+    </section>
+
+    <section id="infusion">
+        <h2>Infusion Pump</h2>
+        <img src="static/imags/infusion_pump.jpg" alt="Infusion Pump">
+        <p>Infusion pumps deliver fluids, medications, or nutrients to patients in controlled amounts. The main parts are the pump mechanism, control panel, and tubing system.</p>
+        <a href="https://www.youtube.com/watch?v=example">Watch a video about Infusion Pumps</a>
+    </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Biomedical Engineering Educational Resources</p>
+    </footer>
+</body>
+<header class="site-header">
+    <nav>
+        <div class="navbar-nav">
+            <a class="nav-item" href="{{ url_for('home') }}">Home</a>
+            <a class="nav-item" href="{{ url_for('imaging') }}">imaging</a>
+            <a class="nav-item" href="{{ url_for('ICU') }}">ICU </a>
+            <a class="nav-item" href="{{ url_for('laboratory') }}">laboratory </a>
+            <a class="nav-item" href="{{ url_for('surgical') }}">surgical </a>
+        </div>
+        <div class="navbar-nav">
+            {% if current_user.is_authenticated %}
+            <a class="nav-item" href="{{ url_for('chat') }}">AI chatbot</a>
+                <a class="nav-item" href="{{ url_for('logout') }}">Logout</a>
+                
+            {% else %}
+                <a class="nav-item" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-item" href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+</html>

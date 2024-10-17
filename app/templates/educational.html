@@ -4,29 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Biomedical Engineer's Assistant</title>
-    <link rel="stylesheet" href="static/about.css">
+    <link rel="stylesheet" href="static/educational.css">
 </head>
 <body>
 
-    <header class="site-header">
-        <nav>
-            <div class="navbar-nav">
-                <a class="nav-item" href="{{ url_for('home') }}">Home</a>
-                <a class="nav-item" href="{{ url_for('about') }}">About</a>
-                <a class="nav-item" href="{{ url_for('educational') }}">educational </a>
-            </div>
-            <div class="navbar-nav">
-                {% if current_user.is_authenticated %}
-                <a class="nav-item" href="{{ url_for('chat') }}">AI chatbot</a>
-                    <a class="nav-item" href="{{ url_for('logout') }}">Logout</a>
-                    
-                {% else %}
-                    <a class="nav-item" href="{{ url_for('login') }}">Login</a>
-                    <a class="nav-item" href="{{ url_for('register') }}">Register</a>
-                {% endif %}
-            </div>
-        </nav>
-    </header>
-</body>
+  
+    <div class=" main_section">
+    <section id="imaging">
+        <h2>Imaging Devices</h2>
+        <img src="static/imags/imaging.jpg" alt="Imaging Devices">
+        <p>Imaging devices are essential tools in medical diagnostics, helping clinicians visualize internal body structures for diagnosis, monitoring, and treatment. Common examples include MRI, CT scanners, and X-ray machines.</p>
+        <a href="imaging.html">Learn more about Imaging Devices</a>
+    </section>
 
+    <section id="icu">
+        <h2>ICU Devices</h2>
+        <img src="static/imags/icu.jpg" alt="ICU Devices">
+        <p>ICU devices are critical in supporting life for patients in intensive care. These devices include ventilators, patient monitors, and infusion pumps that ensure stable and accurate treatment for critically ill patients.</p>
+        <a href="icu.html">Learn more about ICU Devices</a>
+    </section>
+
+    <section id="laboratory">
+        <h2>Laboratory Devices</h2>
+        <img src="static/imags/laboratory.jpg" alt="Laboratory Devices">
+        <p>Laboratory devices are used in medical labs to analyze bodily fluids and tissue samples. Key examples include hematology analyzers, chemistry analyzers, and PCR machines used for detecting diseases and conditions.</p>
+        <a href="laboratory.html">Learn more about Laboratory Devices</a>
+    </section>
+
+    <section id="surgical">
+        <h2>Surgical Devices</h2>
+        <img src="static/imags/surgical.jpg" alt="Surgical Devices">
+        <p>Surgical devices play a crucial role in performing surgeries. These include electrosurgical units, anesthesia machines, and surgical lights, each contributing to safe and effective surgical procedures.</p>
+        <a href="surgical.html">Learn more about Surgical Devices</a>
+    </section>
+</div>
+    <footer>
+        <p>&copy; 2024 Biomedical Engineering Educational Resources</p>
+    </footer>
+</body>
+<header class="site-header">
+    <nav>
+        <div class="navbar-nav">
+            <a class="nav-item" href="{{ url_for('home') }}">Home</a>
+            <a class="nav-item" href="{{ url_for('imaging') }}">imaging</a>
+            <a class="nav-item" href="{{ url_for('ICU') }}">ICU </a>
+            <a class="nav-item" href="{{ url_for('laboratory') }}">laboratory </a>
+            <a class="nav-item" href="{{ url_for('surgical') }}">surgical </a>
+        </div>
+        <div class="navbar-nav">
+            {% if current_user.is_authenticated %}
+            <a class="nav-item" href="{{ url_for('chat') }}">AI chatbot</a>
+                <a class="nav-item" href="{{ url_for('logout') }}">Logout</a>
+                
+            {% else %}
+                <a class="nav-item" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-item" href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
 </html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surgical Devices</title>
+    <link rel="stylesheet" href="static/Surgical.css">
+</head>
+<body>
+    
+     <div class=" main_section">
+    <section id="electrosurgical">
+        <h2>Electrosurgical Unit</h2>
+        <img src="static/imags/electrosurgical_unit.jpg" alt="Electrosurgical Unit">
+        <p>Electrosurgical units are used for cutting tissue or cauterizing blood vessels during surgery. Key parts include the generator, handpiece, and grounding plate.</p>
+        <a href="https://www.youtube.com/watch?v=example">Watch a video about Electrosurgical Units</a>
+    </section>
+
+    <section id="anesthesia">
+        <h2>Anesthesia Machine</h2>
+        <img src="static/imags/anesthesia_machine.jpg" alt="Anesthesia Machine">
+        <p>Anesthesia machines deliver gases and inhalational agents to keep patients unconscious during surgery. Main components include the gas delivery system, vaporizers, and breathing circuit.</p>
+        <a href="https://www.youtube.com/watch?v=example">Watch a video about Anesthesia Machines</a>
+    </section>
+     
+    <section id="surgicallights">
+        <h2>Surgical Lights</h2>
+        <img src="static/imags/surgical_lights.jpg" alt="Surgical Lights">
+        <p>Surgical lights provide optimal illumination during surgery. Important parts include the light head, intensity controls, and positioning arms.</p>
+        <a href="https://www.youtube.com/watch?v=example">Watch a video about Surgical Lights</a>
+    </section>
+</div>
+    <footer>
+        <p>&copy; 2024 Biomedical Engineering Educational Resources</p>
+    </footer>
+</body>
+<header class="site-header">
+    <nav>
+        <div class="navbar-nav">
+            <a class="nav-item" href="{{ url_for('home') }}">Home</a>
+            <a class="nav-item" href="{{ url_for('imaging') }}">imaging</a>
+            <a class="nav-item" href="{{ url_for('ICU') }}">ICU </a>
+            <a class="nav-item" href="{{ url_for('laboratory') }}">laboratory </a>
+            <a class="nav-item" href="{{ url_for('surgical') }}">surgical </a>
+        </div>
+        <div class="navbar-nav">
+            {% if current_user.is_authenticated %}
+            <a class="nav-item" href="{{ url_for('chat') }}">AI chatbot</a>
+                <a class="nav-item" href="{{ url_for('logout') }}">Logout</a>
+                
+            {% else %}
+                <a class="nav-item" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-item" href="{{ url_for('register') }}">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+</html>

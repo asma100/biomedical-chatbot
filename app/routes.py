@@ -34,6 +34,18 @@ def about():
 @app.route("/educational", methods=['GET', 'POST'])
 def educational():
     return render_template('educational.html', title='educational')
+@app.route("/imaging", methods=['GET', 'POST'])
+def imaging():
+    return render_template('imaging.html', title='imaging')
+@app.route("/ICU", methods=['GET', 'POST'])
+def ICU():
+    return render_template('ICU.html', title='ICU')
+@app.route("/laboratory", methods=['GET', 'POST'])
+def laboratory():
+    return render_template('laboratory.html', title='laboratory')
+@app.route("/surgical", methods=['GET', 'POST'])
+def surgical():
+    return render_template('surgical.html', title='surgical')
 
 @app.route('/get_response', methods=['POST'])
 def get_response():
