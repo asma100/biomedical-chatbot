@@ -4,8 +4,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain.llms import HuggingFaceHub
-
-
+import os
 
  
 pdf_paths = [r"D:\vs\device-DR-chatbot\app\pdfs\Gyrozen 416 Centrifuge - Service manual.pdf",
@@ -28,11 +27,12 @@ huggingface_embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 # Create the FAISS index directly using the embeddings and text chunks
 faiss_store = FAISS.from_documents(chunks, huggingface_embeddings)
 
+api_key = os.getenv('huggingfacehub_api_token')
 # Set up the QA chain with a retriever and an LLM
 
 qa_model = HuggingFaceHub(
     repo_id="google/flan-t5-large",
-    huggingfacehub_api_token="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",
+    huggingfacehub_api_token=api_key,
     model_kwargs={"max_length": 1024, "temperature": 0.7, "top_p": 0.9}
 )
 
