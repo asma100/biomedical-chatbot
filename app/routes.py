@@ -26,7 +26,7 @@ def chat():
         if query:
             answer = ask_question(query)
 
-    return render_template('index.html', query=query, answer=answer)
+    return render_template('chatbot.html', query=query, answer=answer)
 
 @app.route("/about", methods=['GET', 'POST'])
 def about():
