@@ -1,6 +1,9 @@
 # Biomedical Chatbot Website
 This project is a Flask-based chatbot website that assists biomedical engineers by answering questions from medical device manuals. The website integrates user authentication, PDF processing, embedding techniques (FAISS), and a question-answering model.
 
+![Untitled design (4)](https://github.com/user-attachments/assets/7bf62363-d2a8-48ef-9e58-6c511fd686c7)
+
+
 ## Features
 
 - User registration and authentication
