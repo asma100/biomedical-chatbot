@@ -3,11 +3,23 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.chains import RetrievalQA
-from langchain.llms import HuggingFaceHub
+from langchain.schema import LLMResult
+from typing import List
+import google.generativeai as genai
 
 
+# Custom Gemini Wrapper
+class GeminiLLM:
+    def __init__(self, model_name='gemini-pro'):
+        self.model = genai.GenerativeModel(model_name)
 
- 
+    # This method ensures compatibility with LangChain
+    def generate(self, prompts: List[str]) -> LLMResult:
+        responses = [self.model.generate(prompt) for prompt in prompts]
+        return LLMResult(generations=[[{"text": response.result}] for response in responses])
+
+
+# Load the PDFs
 pdf_paths = [r"D:\vs\device-DR-chatbot\app\pdfs\Gyrozen 416 Centrifuge - Service manual.pdf",
              r"D:\vs\device-DR-chatbot\app\pdfs\centrifuge2.pdf"]
 
@@ -16,7 +28,6 @@ for path in pdf_paths:
     loader = PyPDFLoader(path)
     documents = loader.load()
     all_documents.extend(documents)
-
 
 # Split the text into chunks
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
@@ -28,25 +39,20 @@ huggingface_embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 # Create the FAISS index directly using the embeddings and text chunks
 faiss_store = FAISS.from_documents(chunks, huggingface_embeddings)
 
-# Set up the QA chain with a retriever and an LLM
+# Use the custom Gemini model
+qa_model = GeminiLLM()
 
-qa_model = HuggingFaceHub(
-    repo_id="google/flan-t5-large",
-    huggingfacehub_api_token="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",
-    model_kwargs={"max_length": 1024, "temperature": 0.7, "top_p": 0.9}
-)
-
+# Create retriever from FAISS store
 retriever = faiss_store.as_retriever(search_kwargs={"max_chunks": 5})
 
-
+# Create QA chain
 qa_chain = RetrievalQA.from_chain_type(
     llm=qa_model,
     retriever=retriever,
     chain_type="stuff"
 )
 
-
+# Function to ask questions
 def ask_question(query):
     response = qa_chain({"query": query})
     return response["result"]
-
