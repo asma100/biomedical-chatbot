@@ -16,7 +16,7 @@ This project is a Flask-based chatbot website that assists biomedical engineers 
 - **Frontend**: HTML templates rendered using Flask's `render_template()`
 - **Backend**: Flask web framework with SQLite/MySQL (using SQLAlchemy ORM) and Flask-Login for user management.
 - **PDF Embedding & Retrieval**: LangChain, Hugging Face Embeddings, FAISS (vector search engine)
-- **Question Answering**: Hugging Face Model (`flan-t5-large`)
+- **Question Answering**: gemini-pro
 
 ## Setup Instructions
 
@@ -31,7 +31,6 @@ Install Python (version 3.8 or above is recommended). Then, create a virtual env
 ```bash
 Copy code
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 ### 3. Install the Dependencies
 Make sure to install the required packages using pip:
@@ -48,7 +47,7 @@ Copy code
 FLASK_APP=run.py
 SECRET_KEY=<your_secret_key>
 DATABASE_URL=sqlite:///site.db  # For SQLite; you can configure for MySQL/PostgreSQL if needed.
-HUGGINGFACE_API_TOKEN=<your_huggingface_api_token>
+GEMINI_API_KEY=<your_GEMINI_API_KEY>
 ```
 ### 5. Initialize the Database
 Run the following commands to create and initialize the database:
@@ -89,7 +88,7 @@ biomedical-chatbot/
 │   ├── templates/            # HTML files for rendering views
 │   ├── static/               # Static assets like CSS, JS, images
 │   ├── pdfs/                 # PDF files for embedding (medical manuals)
-│   ├── langchain.py          # LangChain integration for PDF extraction
+│   ├── gemini.py             #llm + rag 
 │   └── ...                   # Other auxiliary files
 │
 ├── migrations/               # Database migrations

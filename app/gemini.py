@@ -72,7 +72,7 @@ def ask_question(query):
     # Store the current query and answer in the conversation history
     conversation_history.append({'question': query, 'answer': answer})
 
-    # Limit the history to a certain number of exchanges (e.g., last 5 interactions)
+    # Limit the history to a certain number of exchanges (last 5 interactions)
     if len(conversation_history) > 5:
         conversation_history.pop(0)  # Remove the oldest conversation
 
